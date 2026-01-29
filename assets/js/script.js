@@ -5,15 +5,6 @@
 /* ============================= */
 const elementToggleFunc = elem => elem.classList.toggle("active");
 
-/* ============================= */
-/* SIDEBAR TOGGLE */
-/* ============================= */
-const sidebar = document.querySelector("[data-sidebar]");
-const sidebarBtn = document.querySelector("[data-sidebar-btn]");
-
-sidebarBtn.addEventListener("click", () => {
-  elementToggleFunc(sidebar);
-});
 
 /* ============================= */
 /* TESTIMONIAL MODAL (SAFE KEEP) */
