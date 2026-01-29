@@ -124,3 +124,27 @@ function typeWriter() {
 }
 
 window.addEventListener("load", typeWriter);
+/* ============================= */
+/* SKILLS BAR ANIMATION ON SCROLL */
+/* ============================= */
+
+const skillBars = document.querySelectorAll(".skill-progress-fill");
+
+const skillsObserver = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const bar = entry.target;
+        const skillLevel = bar.dataset.skill;
+
+        bar.style.width = skillLevel + "%";
+
+        // Animate only once
+        observer.unobserve(bar);
+      }
+    });
+  },
+  { threshold: 0.4 }
+);
+
+skillBars.forEach(bar => skillsObserver.observe(bar));
