@@ -172,3 +172,19 @@ navigationLinks.forEach(link => {
     window.scrollTo(0, 0);
   });
 });
+// re-trigger hero animations on About click
+const aboutNav = document.querySelector('[data-page="about"]');
+
+document.querySelectorAll('[data-nav-link]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (btn.innerText.toLowerCase() === 'about') {
+      document
+        .querySelectorAll('.animate-left, .animate-right')
+        .forEach(el => {
+          el.style.animation = 'none';
+          el.offsetHeight; // force reflow
+          el.style.animation = '';
+        });
+    }
+  });
+});
