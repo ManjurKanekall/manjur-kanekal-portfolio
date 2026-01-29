@@ -67,3 +67,51 @@ window.addEventListener("mousemove", e => {
   neonCursor.style.transform =
     `translate(${e.clientX}px, ${e.clientY}px)`;
 });
+/* ============================= */
+/* PARTICLE BACKGROUND */
+/* ============================= */
+
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+const PARTICLE_COUNT = 60;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.r = Math.random() * 2 + 1;
+    this.dx = Math.random() * 0.5;
+    this.dy = Math.random() * 0.5;
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(255,215,0,0.5)";
+    ctx.fill();
+  }
+  update() {
+    this.x += this.dx;
+    this.y += this.dy;
+    if (this.x > canvas.width) this.x = 0;
+    if (this.y > canvas.height) this.y = 0;
+    this.draw();
+  }
+}
+
+particles = Array.from({ length: PARTICLE_COUNT }, () => new Particle());
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => p.update());
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
