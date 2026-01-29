@@ -206,3 +206,22 @@ const revealObserver = new IntersectionObserver(
 );
 
 revealElements.forEach(el => revealObserver.observe(el));
+/* ============================= */
+/* TIMELINE STAGGER */
+/* ============================= */
+
+const timelineItems = document.querySelectorAll(".timeline-item");
+
+const timelineObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      timelineItems.forEach((item, index) => {
+        setTimeout(() => {
+          item.classList.add("active");
+        }, index * 200);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+timelineItems.forEach(item => timelineObserver.observe(item));
