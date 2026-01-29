@@ -442,3 +442,31 @@ article.active {
     transform: translateX(0);
   }
 }
+/* ============================= */
+/* SCROLL REVEAL ANIMATIONS */
+/* ============================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Variants */
+.reveal-left {
+  transform: translateX(-60px);
+}
+
+.reveal-right {
+  transform: translateX(60px);
+}
+
+.reveal-left.active,
+.reveal-right.active {
+  transform: translateX(0);
+}
