@@ -42,13 +42,13 @@
       <div class="sidebar-info">
 
         <figure class="avatar-box">
-          <img src="./assets/images/my-avatar.png" alt="Richard hanrick" width="80">
+          <img src="./assets/images/my-avatar.jpg" alt="Manjur Kanekal" width="80">
         </figure>
 
         <div class="info-content">
-          <h1 class="name" title="Richard hanrick">Richard hanrick</h1>
+          <h1 class="name" title="Manjur Kanekal">Manjur Kanekal</h1>
+          <p class="title">Software Developer</p>
 
-          <p class="title">Web developer</p>
         </div>
 
         <button class="info_more-btn" data-sidebar-btn>
@@ -74,7 +74,9 @@
             <div class="contact-info">
               <p class="contact-title">Email</p>
 
-              <a href="mailto:richard@example.com" class="contact-link">richard@example.com</a>
+                <a href="mailto:kanekalmanjur40@gmail.com" class="contact-link">
+                  kanekalmanjur40@gmail.com
+                </a>
             </div>
 
           </li>
@@ -88,7 +90,7 @@
             <div class="contact-info">
               <p class="contact-title">Phone</p>
 
-              <a href="tel:+12133522795" class="contact-link">+1 (213) 352-2795</a>
+                <a href="tel:+12146991010" class="contact-link">+1 (214) 699-1010</a>
             </div>
 
           </li>
@@ -102,7 +104,7 @@
             <div class="contact-info">
               <p class="contact-title">Birthday</p>
 
-              <time datetime="1982-06-23">June 23, 1982</time>
+              <time datetime="1982-06-23">August 06, 1999</time>
             </div>
 
           </li>
@@ -116,7 +118,7 @@
             <div class="contact-info">
               <p class="contact-title">Location</p>
 
-              <address>Sacramento, California, USA</address>
+              <address>Dallas, Texas, USA</address>
             </div>
 
           </li>
@@ -125,27 +127,28 @@
 
         <div class="separator"></div>
 
-        <ul class="social-list">
+          <ul class="social-list">
+          
+            <li class="social-item">
+              <a href="https://github.com/ManjurKanekall" class="social-link" target="_blank" title="GitHub">
+                <ion-icon name="logo-github"></ion-icon>
+              </a>
+            </li>
+          
+            <li class="social-item">
+              <a href="https://www.linkedin.com/in/manjur-k/" class="social-link" target="_blank" title="LinkedIn">
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </a>
+            </li>
+          
+            <li class="social-item">
+              <a href="https://leetcode.com/u/Manjur_Kanekal/" class="social-link" target="_blank" title="LeetCode">
+                <ion-icon name="code-slash-outline"></ion-icon>
+              </a>
+            </li>
+          
+          </ul>
 
-          <li class="social-item">
-            <a href="#" class="social-link">
-              <ion-icon name="logo-facebook"></ion-icon>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="#" class="social-link">
-              <ion-icon name="logo-twitter"></ion-icon>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="#" class="social-link">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-          </li>
-
-        </ul>
 
       </div>
 
@@ -209,19 +212,19 @@
 
         <section class="about-text">
           <p>
-            I'm Creative Director and UI/UX Designer from Sydney, Australia, working in web development and print media.
-            I enjoy
-            turning complex problems into simple, beautiful and intuitive designs.
+            I am a Full Stack Software Developer with 6+ years of experience building
+            scalable, secure, and high-performance web applications across healthcare,
+            fintech, and e-learning domains.
           </p>
-
+        
           <p>
-            My job is to build your website so that it is functional and user-friendly but at the same time attractive.
-            Moreover, I
-            add personal touch to your product and make sure that is eye-catching and easy to use. My aim is to bring
-            across your
-            message and identity in the most creative way. I created web design for many famous brand companies.
+            I specialize in frontend development using React, Angular, TypeScript, and
+            modern state management, along with backend development using Java Spring
+            Boot, REST APIs, WebSocket, and AWS cloud services. I focus strongly on
+            performance, accessibility , and clean, maintainable enterprise code.
           </p>
         </section>
+
 
 
         <!--
@@ -325,7 +328,7 @@
 
                 <div class="testimonials-text" data-testimonials-text>
                   <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
+                    Richard was hired to create a corporate identity. We were very pleased with the work done. He has a
                     lot of experience
                     and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
                     consectetur adipiscing
@@ -944,7 +947,7 @@
       <!--
         - #BLOG
       -->
-
+ <!--
       <article class="blog" data-page="blog">
 
         <header>
@@ -1130,7 +1133,7 @@
       </article>
 
 
-
+-->
 
 
       <!--
@@ -1156,21 +1159,27 @@
           <h3 class="h3 form-title">Contact Form</h3>
 
           <form action="#" class="form" data-form>
-
+          
             <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
-
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+              <input type="text" name="fullname" class="form-input" placeholder="Full Name" required>
+              <input type="email" name="email" class="form-input" placeholder="Email Address" required>
             </div>
-
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
-
-            <button class="form-btn" type="submit" disabled data-form-btn>
+          
+            <input type="tel" name="phone" class="form-input" placeholder="Mobile Number">
+          
+            <textarea
+              name="message"
+              class="form-input"
+              placeholder="Reason for contact (job opportunity, recruiter inquiry, networking, etc.)"
+              required></textarea>
+          
+            <button class="form-btn" type="submit">
               <ion-icon name="paper-plane"></ion-icon>
               <span>Send Message</span>
             </button>
 
-          </form>
+</form>
+
 
         </section>
 
