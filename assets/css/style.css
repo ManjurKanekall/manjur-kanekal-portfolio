@@ -408,18 +408,7 @@ article.active {
 /* HERO ENTRY ANIMATIONS */
 /* ============================= */
 
-.animate-left,
-.animate-right {
-  opacity: 0;
-}
 
-.animate-left {
-  animation: slideLeft 0.9s ease forwards;
-}
-
-.animate-right {
-  animation: slideRight 0.9s ease forwards;
-}
 
 @keyframes slideLeft {
   from {
@@ -470,16 +459,7 @@ article.active {
 .reveal-right.active {
   transform: translateX(0);
 }
-.timeline-item {
-  opacity: 0;
-  transform: translateX(-40px);
-  transition: all 0.6s ease;
-}
 
-.timeline-item.active {
-  opacity: 1;
-  transform: translateX(0);
-}
 .project-item {
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
