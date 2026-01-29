@@ -225,3 +225,20 @@ const timelineObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.3 });
 
 timelineItems.forEach(item => timelineObserver.observe(item));
+/* ============================= */
+/* TYPEWRITER EFFECT */
+/* ============================= */
+
+const text = "Manjur";
+const speed = 120;
+let i = 0;
+
+function typeWriter() {
+  if (i < text.length) {
+    document.getElementById("typewriter").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+}
+
+window.addEventListener("load", typeWriter);
