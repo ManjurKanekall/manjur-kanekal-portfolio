@@ -115,3 +115,32 @@ body {
     display: none;
   }
 }
+/* ============================= */
+/* NEON GLOW CURSOR */
+/* ============================= */
+
+.neon-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: rgba(255, 215, 0, 0.9);
+  box-shadow:
+    0 0 8px rgba(255, 215, 0, 0.8),
+    0 0 20px rgba(255, 215, 0, 0.6),
+    0 0 40px rgba(255, 215, 0, 0.4);
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s linear;
+  z-index: 9999;
+}
+
+/* Hide on mobile */
+@media (max-width: 768px) {
+  .neon-cursor {
+    display: none;
+  }
+}
+
