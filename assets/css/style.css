@@ -154,3 +154,21 @@ body {
   pointer-events: none;
 }
 
+/* ============================= */
+/* PAGE TRANSITIONS */
+/* ============================= */
+
+article {
+  animation: pageIn 0.5s ease both;
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
