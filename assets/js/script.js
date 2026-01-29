@@ -1,142 +1,53 @@
 'use strict';
 
+/* ============================= */
+/* TOGGLE HELPER */
+/* ============================= */
+const elementToggleFunc = elem => elem.classList.toggle("active");
 
-
-// element toggle function
-const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
-
-
-
-// sidebar variables
+/* ============================= */
+/* SIDEBAR TOGGLE */
+/* ============================= */
 const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
-// sidebar toggle functionality for mobile
-sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
+sidebarBtn.addEventListener("click", () => {
+  elementToggleFunc(sidebar);
+});
 
-
-
-// testimonials variables
+/* ============================= */
+/* TESTIMONIAL MODAL (SAFE KEEP) */
+/* ============================= */
 const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
 const modalContainer = document.querySelector("[data-modal-container]");
 const modalCloseBtn = document.querySelector("[data-modal-close-btn]");
 const overlay = document.querySelector("[data-overlay]");
 
-// modal variable
 const modalImg = document.querySelector("[data-modal-img]");
 const modalTitle = document.querySelector("[data-modal-title]");
 const modalText = document.querySelector("[data-modal-text]");
 
-// modal toggle function
-const testimonialsModalFunc = function () {
-  modalContainer.classList.toggle("active");
-  overlay.classList.toggle("active");
-}
+const testimonialsModalFunc = () => {
+  modalContainer?.classList.toggle("active");
+  overlay?.classList.toggle("active");
+};
 
-// add click event to all modal items
-for (let i = 0; i < testimonialsItem.length; i++) {
-
-  testimonialsItem[i].addEventListener("click", function () {
-
+testimonialsItem.forEach(item => {
+  item.addEventListener("click", function () {
     modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
     modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
     modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
     modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
-
     testimonialsModalFunc();
-
   });
+});
 
-}
+modalCloseBtn?.addEventListener("click", testimonialsModalFunc);
+overlay?.addEventListener("click", testimonialsModalFunc);
 
-// add click event to modal close button
-modalCloseBtn.addEventListener("click", testimonialsModalFunc);
-overlay.addEventListener("click", testimonialsModalFunc);
-
-
-
-// custom select variables
-const select = document.querySelector("[data-select]");
-const selectItems = document.querySelectorAll("[data-select-item]");
-const selectValue = document.querySelector("[data-selecct-value]");
-const filterBtn = document.querySelectorAll("[data-filter-btn]");
-
-select.addEventListener("click", function () { elementToggleFunc(this); });
-
-// add event in all select items
-for (let i = 0; i < selectItems.length; i++) {
-  selectItems[i].addEventListener("click", function () {
-
-    let selectedValue = this.innerText.toLowerCase();
-    selectValue.innerText = this.innerText;
-    elementToggleFunc(select);
-    filterFunc(selectedValue);
-
-  });
-}
-
-// filter variables
-const filterItems = document.querySelectorAll("[data-filter-item]");
-
-const filterFunc = function (selectedValue) {
-
-  for (let i = 0; i < filterItems.length; i++) {
-
-    if (selectedValue === "all") {
-      filterItems[i].classList.add("active");
-    } else if (selectedValue === filterItems[i].dataset.category) {
-      filterItems[i].classList.add("active");
-    } else {
-      filterItems[i].classList.remove("active");
-    }
-
-  }
-
-}
-
-// add event in all filter button items for large screen
-let lastClickedBtn = filterBtn[0];
-
-for (let i = 0; i < filterBtn.length; i++) {
-
-  filterBtn[i].addEventListener("click", function () {
-
-    let selectedValue = this.innerText.toLowerCase();
-    selectValue.innerText = this.innerText;
-    filterFunc(selectedValue);
-
-    lastClickedBtn.classList.remove("active");
-    this.classList.add("active");
-    lastClickedBtn = this;
-
-  });
-
-}
-
-
-
-// contact form variables
-const form = document.querySelector("[data-form]");
-const formInputs = document.querySelectorAll("[data-form-input]");
-const formBtn = document.querySelector("[data-form-btn]");
-
-// add event to all form input field
-for (let i = 0; i < formInputs.length; i++) {
-  formInputs[i].addEventListener("input", function () {
-
-    // check form validation
-    if (form.checkValidity()) {
-      formBtn.removeAttribute("disabled");
-    } else {
-      formBtn.setAttribute("disabled", "");
-    }
-
-  });
-}
-
-
-
-// page navigation variables
+/* ============================= */
+/* PAGE NAVIGATION (✅ SINGLE SOURCE) */
+/* ============================= */
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
@@ -152,50 +63,32 @@ navigationLinks.forEach(link => {
       nav.classList.toggle("active", nav === link);
     });
 
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 });
 
-
-navigationLinks.forEach(link => {
-  link.addEventListener("click", () => {
-    const targetPage = link.dataset.page;
-
-    pages.forEach(page => {
-      page.classList.toggle("active", page.dataset.page === targetPage);
-    });
-
-    navigationLinks.forEach(nav => {
-      nav.classList.toggle("active", nav === link);
-    });
-
-    window.scrollTo(0, 0);
-  });
-});
-// re-trigger hero animations on About click
-const aboutNav = document.querySelector('[data-page="about"]');
-
+/* ============================= */
+/* HERO RE-ANIMATION ON ABOUT */
+/* ============================= */
 document.querySelectorAll('[data-nav-link]').forEach(btn => {
   btn.addEventListener('click', () => {
-    if (btn.innerText.toLowerCase() === 'about') {
-      document
-        .querySelectorAll('.animate-left, .animate-right')
-        .forEach(el => {
-          el.style.animation = 'none';
-          el.offsetHeight; // force reflow
-          el.style.animation = '';
-        });
+    if (btn.dataset.page === 'about') {
+      document.querySelectorAll('.animate-left, .animate-right').forEach(el => {
+        el.style.animation = 'none';
+        el.offsetHeight; // force reflow
+        el.style.animation = '';
+      });
     }
   });
 });
-/* ============================= */
-/* SCROLL REVEAL OBSERVER */
-/* ============================= */
 
+/* ============================= */
+/* SCROLL REVEAL */
+/* ============================= */
 const revealElements = document.querySelectorAll(".reveal");
 
 const revealObserver = new IntersectionObserver(
-  (entries) => {
+  entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add("active");
@@ -206,29 +99,27 @@ const revealObserver = new IntersectionObserver(
 );
 
 revealElements.forEach(el => revealObserver.observe(el));
+
 /* ============================= */
 /* TIMELINE STAGGER */
 /* ============================= */
-
 const timelineItems = document.querySelectorAll(".timeline-item");
 
 const timelineObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       timelineItems.forEach((item, index) => {
-        setTimeout(() => {
-          item.classList.add("active");
-        }, index * 200);
+        setTimeout(() => item.classList.add("active"), index * 200);
       });
     }
   });
 }, { threshold: 0.3 });
 
 timelineItems.forEach(item => timelineObserver.observe(item));
+
 /* ============================= */
 /* TYPEWRITER EFFECT */
 /* ============================= */
-
 const text = "Manjur";
 const speed = 120;
 let i = 0;
