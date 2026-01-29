@@ -57,3 +57,13 @@ toggle.onclick = () => {
 };
 
 if (localStorage.theme === 'light') document.body.classList.add('light');
+/* ============================= */
+/* NEON CURSOR FOLLOW */
+/* ============================= */
+
+const neonCursor = document.querySelector(".neon-cursor");
+
+window.addEventListener("mousemove", e => {
+  neonCursor.style.transform =
+    `translate(${e.clientX}px, ${e.clientY}px)`;
+});
