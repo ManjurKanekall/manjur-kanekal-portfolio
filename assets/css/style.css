@@ -3,8 +3,8 @@
 \*-----------------------------------*/
 
 /**
- * Original Template: codewithsadee
- * Customized for Manjur Kanekal
+ * Customized Portfolio Styles
+ * Author: Manjur Kanekal
  */
 
 /*-----------------------------------*\
@@ -12,23 +12,10 @@
 \*-----------------------------------*/
 
 :root {
-
   --bg-gradient-onyx: linear-gradient(
     to bottom right,
     hsl(240, 1%, 25%) 3%,
     hsl(0, 0%, 19%) 97%
-  );
-
-  --bg-gradient-jet: linear-gradient(
-    to bottom right,
-    hsla(240, 1%, 18%, 0.25),
-    hsla(240, 2%, 11%, 0)
-  ), hsl(240, 2%, 13%);
-
-  --border-gradient-onyx: linear-gradient(
-    to bottom right,
-    hsl(0, 0%, 25%),
-    hsla(0, 0%, 25%, 0)
   );
 
   --text-gradient-yellow: linear-gradient(
@@ -41,32 +28,22 @@
   --eerie-black-1: hsl(240, 2%, 13%);
   --eerie-black-2: hsl(240, 2%, 12%);
   --jet: hsl(0, 0%, 22%);
-  --white-1: hsl(0, 0%, 100%);
   --white-2: hsl(0, 0%, 98%);
   --light-gray: hsl(0, 0%, 84%);
-  --light-gray-70: hsla(0, 0%, 84%, 0.7);
   --orange-yellow-crayola: hsl(45, 100%, 72%);
   --vegas-gold: hsl(45, 54%, 58%);
 
   --ff-poppins: "Poppins", sans-serif;
 
   --fs-1: 32px;
-  --fs-2: 24px;
   --fs-3: 20px;
-  --fs-4: 16px;
-  --fs-5: 15px;
-  --fs-6: 14px;
   --fs-7: 13px;
 
-  --fw-300: 300;
-  --fw-400: 400;
   --fw-500: 500;
   --fw-600: 600;
 
   --shadow-1: -4px 8px 24px hsla(0,0%,0%,0.25);
   --shadow-2: 0 16px 40px hsla(0,0%,0%,0.25);
-
-  --transition-1: 0.25s ease;
 }
 
 /*-----------------------------------*\
@@ -81,12 +58,18 @@
   box-sizing: border-box;
 }
 
-html { font-family: var(--ff-poppins); }
-body { background: var(--smoky-black); color: var(--white-2); }
+html {
+  font-family: var(--ff-poppins);
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--smoky-black);
+  color: var(--white-2);
+}
 
 a { text-decoration: none; color: inherit; }
-button { background: none; border: none; cursor: pointer; font: inherit; }
-
+button { background: none; border: none; cursor: pointer; }
 img { max-width: 100%; display: block; }
 
 /*-----------------------------------*\
@@ -134,19 +117,6 @@ main {
   padding: 4px 10px;
   border-radius: 8px;
   display: inline-block;
-}
-
-.contacts-list {
-  margin-top: 30px;
-  display: grid;
-  gap: 15px;
-}
-
-.social-list {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 25px;
 }
 
 /*-----------------------------------*\
@@ -211,7 +181,6 @@ article.active {
 .article-title {
   font-size: var(--fs-1);
   margin-bottom: 30px;
-  position: relative;
 }
 
 .article-title::after {
@@ -268,6 +237,7 @@ article.active {
   padding: 14px 28px;
   border-radius: 14px;
   font-weight: var(--fw-500);
+  transition: transform 0.3s ease;
 }
 
 .hero-btn.primary {
@@ -278,6 +248,10 @@ article.active {
 .hero-btn.secondary {
   border: 1px solid var(--orange-yellow-crayola);
   color: var(--orange-yellow-crayola);
+}
+
+.hero-btn:hover {
+  transform: translateY(-4px) scale(1.03);
 }
 
 .hero-avatar {
@@ -334,12 +308,14 @@ article.active {
   background: var(--jet);
   height: 8px;
   border-radius: 6px;
+  overflow: hidden;
 }
 
 .skill-progress-fill {
   height: 100%;
   background: var(--text-gradient-yellow);
-  border-radius: inherit;
+  width: 0;
+  transition: width 1s ease;
 }
 
 /*-----------------------------------*\
@@ -357,31 +333,41 @@ article.active {
   overflow: hidden;
 }
 
+.project-item {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.project-item:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-2);
+}
+
 /*-----------------------------------*\
-  #CONTACT
+  #SCROLL REVEAL
 \*-----------------------------------*/
 
-.mapbox {
-  height: 300px;
-  border-radius: 16px;
-  overflow: hidden;
-  margin-bottom: 30px;
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
 }
 
-.form-input {
-  padding: 14px;
-  border-radius: 14px;
-  border: 1px solid var(--jet);
-  color: var(--white-2);
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.form-btn {
-  margin-top: 20px;
-  padding: 14px 26px;
-  border-radius: 14px;
-  background: var(--text-gradient-yellow);
-  color: var(--smoky-black);
-  font-weight: var(--fw-500);
+.reveal-left {
+  transform: translateX(-60px);
+}
+
+.reveal-right {
+  transform: translateX(60px);
+}
+
+.reveal-left.active,
+.reveal-right.active {
+  transform: translateX(0);
 }
 
 /*-----------------------------------*\
@@ -402,76 +388,3 @@ article.active {
     grid-template-columns: 1fr;
   }
 }
-
-
-/* ============================= */
-/* HERO ENTRY ANIMATIONS */
-/* ============================= */
-
-
-
-@keyframes slideLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-60px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideRight {
-  from {
-    opacity: 0;
-    transform: translateX(60px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-/* ============================= */
-/* SCROLL REVEAL ANIMATIONS */
-/* ============================= */
-
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease;
-}
-
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Variants */
-.reveal-left {
-  transform: translateX(-60px);
-}
-
-.reveal-right {
-  transform: translateX(60px);
-}
-
-.reveal-left.active,
-.reveal-right.active {
-  transform: translateX(0);
-}
-
-.project-item {
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.project-item:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-4);
-}
-.hero-btn:hover {
-  transform: translateY(-4px) scale(1.03);
-}
-html {
-  scroll-behavior: smooth;
-}
-
