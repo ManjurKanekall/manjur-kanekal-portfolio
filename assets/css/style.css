@@ -480,4 +480,12 @@ article.active {
   opacity: 1;
   transform: translateX(0);
 }
+.project-item {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.project-item:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-4);
+}
 
