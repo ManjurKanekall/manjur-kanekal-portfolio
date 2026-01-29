@@ -313,9 +313,10 @@ article.active {
 
 .skill-progress-fill {
   height: 100%;
+  width: 0; /* IMPORTANT */
   background: var(--text-gradient-yellow);
-  width: 0;
-  transition: width 1s ease;
+  border-radius: inherit;
+  transition: width 1.2s ease-in-out;
 }
 
 /*-----------------------------------*\
