@@ -1,150 +1,59 @@
 'use strict';
 
-/* ============================= */
-/* TOGGLE HELPER */
-/* ============================= */
-const elementToggleFunc = elem => elem.classList.toggle("active");
+/* PAGE NAV */
+const links = document.querySelectorAll('[data-nav-link]');
+const pages = document.querySelectorAll('.page');
 
-
-/* ============================= */
-/* TESTIMONIAL MODAL (SAFE KEEP) */
-/* ============================= */
-const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
-const modalContainer = document.querySelector("[data-modal-container]");
-const modalCloseBtn = document.querySelector("[data-modal-close-btn]");
-const overlay = document.querySelector("[data-overlay]");
-
-const modalImg = document.querySelector("[data-modal-img]");
-const modalTitle = document.querySelector("[data-modal-title]");
-const modalText = document.querySelector("[data-modal-text]");
-
-const testimonialsModalFunc = () => {
-  modalContainer?.classList.toggle("active");
-  overlay?.classList.toggle("active");
-};
-
-testimonialsItem.forEach(item => {
-  item.addEventListener("click", function () {
-    modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
-    modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
-    modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
-    modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
-    testimonialsModalFunc();
+links.forEach(link => {
+  link.addEventListener('click', () => {
+    const target = link.dataset.page;
+    pages.forEach(p => p.classList.toggle('active', p.dataset.page === target));
+    links.forEach(l => l.classList.toggle('active', l === link));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
 
-modalCloseBtn?.addEventListener("click", testimonialsModalFunc);
-overlay?.addEventListener("click", testimonialsModalFunc);
-
-/* ============================= */
-/* PAGE NAVIGATION (✅ SINGLE SOURCE) */
-/* ============================= */
-const navigationLinks = document.querySelectorAll("[data-nav-link]");
-const pages = document.querySelectorAll("[data-page]");
-
-navigationLinks.forEach(link => {
-  link.addEventListener("click", () => {
-    const targetPage = link.dataset.page;
-
-    pages.forEach(page => {
-      page.classList.toggle("active", page.dataset.page === targetPage);
-    });
-
-    navigationLinks.forEach(nav => {
-      nav.classList.toggle("active", nav === link);
-    });
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-});
-
-/* ============================= */
-/* HERO RE-ANIMATION ON ABOUT */
-/* ============================= */
-document.querySelectorAll('[data-nav-link]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    if (btn.dataset.page === 'about') {
-      document.querySelectorAll('.animate-left, .animate-right').forEach(el => {
-        el.style.animation = 'none';
-        el.offsetHeight; // force reflow
-        el.style.animation = '';
-      });
-    }
-  });
-});
-
-/* ============================= */
-/* SCROLL REVEAL */
-/* ============================= */
-const revealElements = document.querySelectorAll(".reveal");
-
-const revealObserver = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("active");
-      }
-    });
-  },
-  { threshold: 0.15 }
-);
-
-revealElements.forEach(el => revealObserver.observe(el));
-
-/* ============================= */
-/* TIMELINE STAGGER */
-/* ============================= */
-const timelineItems = document.querySelectorAll(".timeline-item");
-
-const timelineObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      timelineItems.forEach((item, index) => {
-        setTimeout(() => item.classList.add("active"), index * 200);
-      });
-    }
-  });
-}, { threshold: 0.3 });
-
-timelineItems.forEach(item => timelineObserver.observe(item));
-
-/* ============================= */
-/* TYPEWRITER EFFECT */
-/* ============================= */
+/* TYPEWRITER */
 const text = "Manjur";
-const speed = 120;
 let i = 0;
-
 function typeWriter() {
   if (i < text.length) {
-    document.getElementById("typewriter").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeWriter, speed);
+    document.getElementById("typewriter").textContent += text[i++];
+    setTimeout(typeWriter, 120);
   }
 }
+window.onload = typeWriter;
 
-window.addEventListener("load", typeWriter);
-/* ============================= */
-/* SKILLS BAR ANIMATION ON SCROLL */
-/* ============================= */
+/* REVEAL */
+const reveals = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => e.isIntersecting && e.target.classList.add('active'));
+});
+reveals.forEach(r => revealObs.observe(r));
 
-const skillBars = document.querySelectorAll(".skill-progress-fill");
+/* SKILLS */
+document.querySelectorAll('.skill-progress-fill').forEach(bar => {
+  new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      bar.style.width = bar.dataset.skill + '%';
+    }
+  }).observe(bar);
+});
 
-const skillsObserver = new IntersectionObserver(
-  (entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const bar = entry.target;
-        const skillLevel = bar.dataset.skill;
+/* CURSOR */
+const dot = document.querySelector('.cursor-dot');
+const ring = document.querySelector('.cursor-ring');
 
-        bar.style.width = skillLevel + "%";
+window.addEventListener('mousemove', e => {
+  dot.style.left = ring.style.left = e.clientX + 'px';
+  dot.style.top = ring.style.top = e.clientY + 'px';
+});
 
-        // Animate only once
-        observer.unobserve(bar);
-      }
-    });
-  },
-  { threshold: 0.4 }
-);
+/* DARK MODE */
+const toggle = document.querySelector('.theme-toggle');
+toggle.onclick = () => {
+  document.body.classList.toggle('light');
+  localStorage.theme = document.body.classList.contains('light') ? 'light' : 'dark';
+};
 
-skillBars.forEach(bar => skillsObserver.observe(bar));
+if (localStorage.theme === 'light') document.body.classList.add('light');
